@@ -12,11 +12,28 @@
         font-size: 18px;
       }
     </style>
+
+    <style>
+      #welcome {
+        position: absolute;
+        z-index: 9;
+        background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;
+      }
+
+      #header {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        background-color: #2196f3;
+        color: #fff;
+      }
+    </style>
   </head>
 
   <body bgcolor="#C1ADC0">
-    
-<div
+    <div
       style="
         width: 100%;
         display: flex;
@@ -26,12 +43,11 @@
         justify-content: start;
       "
     >
-      <p  id ="timeElement"style="margin-left: 16px"> 7/18/24 7:06 PM </p>
-  
+      <p id="timeElement" style="margin-left: 16px">7/18/24 7:06 PM</p>
     </div>
-    
+
     <div
-      id= "welcome"
+      id="welcome"
       style="
         border: 1mm ridge rgba(200, 20, 54, 0.4);
         width: 270px;
@@ -44,7 +60,43 @@
         transform: translate(-50%, -50%);
       "
     >
+  
+      
+      	<p align="left"style="cursor: pointer" id="welcomeclose">Close</p>
+
+      
+      
+      
+    <div id="nothing" style="
+    margin: 10px 0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    background-color: #ff69b4;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    text-align: left;
+  ">
+      
+      
+     
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <img
+           
+        id="welcomeopen"   
+           
         width="100px"
         ;
         height="100px"
@@ -55,24 +107,104 @@
         ;
       />
 
-      <h1 style="margin: 4px">Poppy OS</h1>
+      <h1 id="header" style="margin: 4px">Poppy OS</h1>
 
       <font>
         Welcome to my personal operating system. Use this to know more about me
         :)</font
       >
-      
-      
-         
 
+      <script>
+        dragElement(document.getElementById("welcome"));
 
-      
-      
-        <script src="script.js"></script>
+        function dragElement(elmnt) {
+          var pos1 = 0,
+            pos2 = 0,
+            pos3 = 0,
+            pos4 = 0;
+          if (document.getElementById(elmnt.id + "header")) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById(elmnt.id + "header").onmousedown =
+              dragMouseDown;
+          } else {
+            // otherwise, move the DIV from anywhere inside the DIV:
+            elmnt.onmousedown = dragMouseDown;
+          }
 
+          function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+          }
+
+          function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+            elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+          }
+
+          function closeDragElement() {
+            // stop moving when mouse button is released:
+            document.onmouseup = null;
+            document.onmousemove = null;
+          }
+        }
+
+        //_________________________________________________________________
+
+        var welcomeScreen = document.querySelector("#welcome");
+
+        //close window function
+
+        function closeWindow(element) {
+          element.style.display = "none";
+        }
+
+        //open window function
+
+        function openWindow(element) {
+          element.style.display = "flex";
+        }
+        
       
-    
+      var welcomeScreenClose = document.querySelector("#welcomeclose")
+       
+      var welcomeScreenClose = document.querySelector("#welcomeopen")
+        
+      
+ welcomeScreenClose.addEventListener("click", function() {
+  closeWindow(welcomeScreen);
+});
+
+welcomeScreenOpen.addEventListener("click", function() {
+  openWindow(welcomeScreen);
+});     
+      
+      
+     
+      
+      
+      
+      
+      </script>
     </div>
   </body>
 </html>
+
+
+      
+    
+    
 
